@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState, useCallback } from 'react';
 
 import Header from './components/Header';
 import Table from './components/Table';
@@ -9,11 +8,14 @@ import './Dashboard.scss';
 
 const Dashboard = () => {
     const [modal, setModal] = useState(false);
+    const [updated, setUpdated] = useState(false);
     const openModalHandler = index => setModal(index);
 
-    const closeModalHandler = index => {
+    const closeModalHandler = useCallback((rerender) => {
         setModal(false);
-    };
+        console.log(rerender);
+        !!rerender && setUpdated(Math.random());
+    }, []);
 
     return (
         <div className="row" id="dashboard">
@@ -27,7 +29,10 @@ const Dashboard = () => {
                 close={closeModalHandler}
             />
             <Header openModal={openModalHandler}/>
-            <Table openModal={openModalHandler}/>
+            <Table 
+                openModal={openModalHandler}
+                updated={updated}
+            />
         </div>
     );
 };

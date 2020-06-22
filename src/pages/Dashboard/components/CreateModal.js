@@ -59,7 +59,7 @@ const CreateModal = (props) => {
             })
             setError(false);
             setLoading(false);
-            props.close();
+            props.close(true);
         } catch (err) {
             setLoading(false);
             setError(false);
@@ -76,7 +76,8 @@ const CreateModal = (props) => {
             className="modal"
             centered
         > 
-        <div className="col-lg-12 login-form">
+        <div className="col-lg-12">
+            <div className="remove-button" onClick={() => props.close(false)}>&#10005;</div>
             <div className="form">
                 <h4 className="title mb-4">Add new alert</h4>
                 <Error error={error}/>

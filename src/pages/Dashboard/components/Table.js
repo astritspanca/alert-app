@@ -10,6 +10,7 @@ const Table = props => {
     const [alerts, setAlerts] = useState();
     
     const auth = useContext(AuthContext);
+    const { updated } = props;
 
     const getAlerts = useCallback(async () => {
         setError(false);
@@ -34,7 +35,7 @@ const Table = props => {
     
     useEffect(() => {
         getAlerts();
-    }, [getAlerts]);
+    }, [getAlerts, updated]);
 
     if(loading){
         return (
@@ -104,7 +105,7 @@ const Table = props => {
                                             <td className="event-td">{el.value}</td>
                                             <td className="event-td">{getDayDifference(el.created_at)}</td>
                                             <td className="event-td text-center">
-                                                <FontAwesomeIcon icon={faTrashAlt} onClick={() => props.openModal(el.id)}/>
+                                                <FontAwesomeIcon icon={faTrashAlt} className="delete-button" onClick={() => props.openModal(el.id)}/>
                                             </td>
                                         </tr>
                                     )

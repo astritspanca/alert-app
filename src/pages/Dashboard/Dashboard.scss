@@ -25,10 +25,12 @@
                 display: flex;
                 justify-content: flex-end;
                 padding: 16px;
+                cursor: pointer;
         
                 .user-data{
                     display: flex;
                     align-items: center;
+                    outline: none;
         
                     .user-name{
                         color: #ffffff;
@@ -46,6 +48,30 @@
                         align-items: center;
                         font-weight: 600;
                         margin-left: 7px;
+                    }
+                }
+
+                .user-data-dropdwown{
+                    position: absolute;
+                    top: 100%;
+                    right: 15px;
+                    width: 200px;
+                    background-color: #ffffff;
+                    border-radius: 3px;
+                    padding: 15px;
+                    z-index: 11;
+
+                    button{
+                        border: none;
+                        background-color: transparent;
+                        width: 100%;
+                        text-align: left;
+                        padding: 5px 15px;
+                        transition: all .15s linear;
+
+                        &:hover{
+                            background-color: #f1f1f1;
+                        }
                     }
                 }
             }
@@ -93,7 +119,25 @@
                 }
             }
         }
+
+        .delete-button{
+            color: #ff0000;
+            cursor: pointer;
+            transition: all .15s linear;
+
+            &:hover{
+                color: #b60c0c;
+                transform: scale(1.1);
+            }
+        }
     }
+}
+
+.remove-button{
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    cursor: pointer;
 }
 
 .modal-content{

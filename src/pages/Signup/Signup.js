@@ -62,11 +62,10 @@ const Signup = () => {
                                     name="name"
                                     label="NAME*"
                                     register={register({ required: true })}
-                                    onBlur={() => triggerValidation('email')}
+                                    onBlur={() => triggerValidation('name')}
                                     onChange={() => {
                                         (errors.name?.type === 'required') && triggerValidation('name');
                                     }}
-                                    error={errors.name?.type === 'required'}
                                 >
                                     {errors.name?.type === 'required' && <p className="error-text">Name is required!</p>}
                                 </Input>
@@ -77,12 +76,11 @@ const Signup = () => {
                                     placeholder="Email address"
                                     name="email"
                                     label="EMAIL*"
-                                    ref={register({ required: true, pattern: /^\S+@\S+\.\S+$/ })}
+                                    register={register({ required: true, pattern: /^\S+@\S+\.\S+$/ })}
                                     onBlur={() => triggerValidation('email')}
                                     onChange={() => {
                                         (errors.email?.type === 'required' || errors.email?.type === 'pattern') && triggerValidation('email');
                                     }}
-                                    error={errors.email?.type === 'required' || errors.email?.type === 'pattern'}
                                 >
                                     {errors.email?.type === 'required' && <p className="error-text">Email is required!</p>}
                                     {errors.email?.type === 'pattern' && <p className="error-text">Field must be email!</p>}
@@ -99,7 +97,6 @@ const Signup = () => {
                                     onChange={() => {
                                         (errors.password?.type === 'required' || errors.password?.type === 'minLength') && triggerValidation('password');
                                     }}
-                                    error={errors.password?.type === 'required' || errors.password?.type === 'minLength'}
                                 >
                                     {errors.password?.type === 'required' && <p className="error-text">Password is required!</p>}
                                     {errors.password?.type === 'minLength' && <p className="error-text">Password should be atleast 8 characters long!</p>}
@@ -111,7 +108,7 @@ const Signup = () => {
                                     placeholder="Password"
                                     name="confirm"
                                     label="PASSWORD CONFIRMATION*"
-                                    ref={register({
+                                    register={register({
                                         validate: value =>
                                             value === password.current
                                         })

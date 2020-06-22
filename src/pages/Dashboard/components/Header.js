@@ -12,6 +12,8 @@ const Header = props => {
         history.push('/login');
     }
 
+    const toggleDropdown = () => setDropdown(preveState => !preveState);
+
     return (
         <div className="col-lg-12 dashboard-header-wrapper">
             <div className="row">
@@ -21,13 +23,15 @@ const Header = props => {
                             <h3>PWD<span>RESET</span></h3>
                         </div>
                         <div className="col-6 user-menu">
-                            <div className="user-data" onClick={() => setDropdown(true)}>
+                            <div className="user-data" onClick={toggleDropdown}>
                                 <h4 className="user-name">{auth.name}</h4>
                                 <div className="avatar">AS</div>
+                                {dropdown && (
+                                    <div className="user-data-dropdwown">
+                                        <button onClick={logoutHandler}>Logout</button>
+                                    </div>
+                                )}
                             </div>
-                            {
-                                dropdown && <button onClick={logoutHandler}>Logout</button>
-                            }
                         </div>
                         <button className="add--more__button" onClick={() => props.openModal(1)}>+</button>
                     </div>
