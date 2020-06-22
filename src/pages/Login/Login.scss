@@ -1,0 +1,35 @@
+#app-login{
+    height: 100vh;
+
+    .login-image{
+        padding: 0;
+
+        img{
+            width: 100%;
+            height: 100vh;
+        }
+    }
+
+    .login-form{
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+
+        .form{
+            width: 500px;
+            max-width: 100%;
+        }
+
+        .signup--button__wrapper{
+            padding: 15px 0;
+        }
+    }
+
+    @media (max-width: 1092px){
+        .login-image{
+            display: none;
+        }
+    }
+}
