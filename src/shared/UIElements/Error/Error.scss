@@ -1,0 +1,22 @@
+.error-message{
+    background-color: red;
+    padding: 15px;
+    border-radius: 3px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    animation: popup 1s linear;
+
+    p{
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
+@keyframes popup{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

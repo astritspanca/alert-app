@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
+import axios from '../../axios';
 import Input from '../../shared/FormElements/Input/Input';
+import Error from '../../shared/UIElements/Error/Error';
+import Loading from '../../shared/UIElements/Loading/Loading';
 import './Signup.scss';
 
 const Signup = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const { register, handleSubmit, triggerValidation, errors } = useForm();
 
+    const history = useHistory();
+
     const onSignupHandler = async e => {
-        console.log(e);
+        if(loading){
+            return; // prevent user from resubmiting the form while http request is going on
+        }
+        
+        setError(false);
+        setLoading(true);
+        try{
+            let response = await axios({
+                method: 'POST',
+                url: '/users',
+                data: e
+            })
+            setLoading(false);
+            setError(false);
+            history.push('/login');
+        } catch (err) {
+            setLoading(false);
+            setError(false);
+            setError(err.response?.data?.message || 'Something went wrong. Please try again');
+        }
     };
 
     return (
@@ -22,6 +48,8 @@ const Signup = () => {
                     <div className="col-lg-6 signup-form">
                         <div className="form">
                             <h4 className="title">Sign up</h4>
+                            <Error error={error}/>
+                            <Loading loading={loading}/>
                             <form onSubmit={handleSubmit(onSignupHandler)}>
                                 <Input 
                                     type="text" 

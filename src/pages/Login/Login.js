@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from 'react-router-dom';
 
+import axios from '../../axios';
 import Input from '../../shared/FormElements/Input/Input';
+import Error from '../../shared/UIElements/Error/Error';
+import Loading from '../../shared/UIElements/Loading/Loading';
 import './Login.scss';
 
 const Login = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const { register, handleSubmit, triggerValidation, errors } = useForm();
 
-    const onSignupHandler = async e => {
-        console.log(e);
+    const onLoginHandler = async e => {
+        setError(false);
+        setLoading(true);
+        try{
+            let response = await axios({
+                method: 'POST',
+                url: '/auth/login',
+                data: e
+            })
+            setLoading(false);
+            setError(false);
+            console.log(response.data);
+        } catch (err) {
+            setLoading(false);
+            setError(false);
+            setError(err.response?.data?.message || 'Something went wrong. Please try again');
+        }
     };
 
     return (
@@ -22,7 +42,9 @@ const Login = () => {
                     <div className="col-lg-6 login-form">
                         <div className="form">
                             <h4 className="title">Sign in</h4>
-                            <form onSubmit={handleSubmit(onSignupHandler)}>
+                            <Error error={error}/>
+                            <Loading loading={loading}/>
+                            <form onSubmit={handleSubmit(onLoginHandler)}>
                                 <Input 
                                     type="text" 
                                     class="form--control" 
