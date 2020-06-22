@@ -22,15 +22,38 @@ const Login = () => {
                 url: '/auth/login',
                 data: e
             })
-            setLoading(false);
             setError(false);
-            console.log(response.data);
+            getUserData(response.data);
         } catch (err) {
             setLoading(false);
             setError(false);
-            setError(err.response?.data?.message || 'Something went wrong. Please try again');
+            setError(err.response?.data?.message || 'Something went wrong. Please try again!!!');
         }
     };
+
+    const getUserData = async ({ token }) => {
+        try{
+            let response = await axios({
+                method: 'GET',
+                url: '/users/me',
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+            const userData = {
+                uid: response.data.id,
+                token: token,
+                name: response.data.name
+            }
+
+            console.log(userData);
+        } catch (err) {
+            setLoading(false);
+            setError(false);
+            setError(err.response?.data?.message || 'Something went wrong. Please try again!!!');
+        }
+        
+    }
 
     return (
         <div className="row">
@@ -41,7 +64,7 @@ const Login = () => {
                     </div>
                     <div className="col-lg-6 login-form">
                         <div className="form">
-                            <h4 className="title">Sign in</h4>
+                            <h4 className="title mb-4">Sign in</h4>
                             <Error error={error}/>
                             <Loading loading={loading}/>
                             <form onSubmit={handleSubmit(onLoginHandler)}>
@@ -84,7 +107,7 @@ const Login = () => {
                                 </div>
                                 <hr/>
                                 <div className="pt-3 pb-3">
-                                    <NavLink to="/login" className="btn-b">Aleready a new accout!</NavLink>
+                                    <NavLink to="/login" className="btn-b">Already a new accout!</NavLink>
                                 </div>
                             </form>
                         </div>

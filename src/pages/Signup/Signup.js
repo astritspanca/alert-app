@@ -30,6 +30,7 @@ const Signup = () => {
             })
             setLoading(false);
             setError(false);
+            console.log(response);
             history.push('/login');
         } catch (err) {
             setLoading(false);
@@ -47,7 +48,7 @@ const Signup = () => {
                     </div>
                     <div className="col-lg-6 signup-form">
                         <div className="form">
-                            <h4 className="title">Sign up</h4>
+                            <h4 className="title mb-4">Sign up</h4>
                             <Error error={error}/>
                             <Loading loading={loading}/>
                             <form onSubmit={handleSubmit(onSignupHandler)}>
