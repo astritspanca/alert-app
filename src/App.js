@@ -18,6 +18,7 @@ function App() {
         <Switch>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
+            <Route render={() => <h3>Page not found!!!</h3>} />
         </Switch>
       </Suspense>
     )
@@ -28,6 +29,7 @@ function App() {
       <Suspense fallback="Loading...">
         <Switch>
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route render={() => <h3>Page not found!!!</h3>} />
         </Switch>
       </Suspense>
     )

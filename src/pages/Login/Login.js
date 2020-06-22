@@ -112,7 +112,7 @@ const Login = () => {
                                 </div>
                                 <hr/>
                                 <div className="pt-3 pb-3">
-                                    <NavLink to="/signup" className="btn-b">Already a new accout!</NavLink>
+                                    <NavLink to="/signup" className="btn-b">Create a new accout!</NavLink>
                                 </div>
                             </form>
                         </div>

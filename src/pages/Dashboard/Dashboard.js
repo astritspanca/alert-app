@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 
 import Header from './components/Header';
 import Table from './components/Table';
+import CreateModal from './components/CreateModal';
+import DeleteModal from './components/DeleteModal';
 import './Dashboard.scss';
 
 const Dashboard = () => {
+    const [modal, setModal] = useState(false);
+    const openModalHandler = index => setModal(index);
+
+    const closeModalHandler = index => {
+        setModal(false);
+    };
+
     return (
-        <div id="dashboard">
-            <div className="row">
-                <Header/>
-                <Table/>
-            </div>
+        <div className="row" id="dashboard">
+            <CreateModal 
+                open={modal === 1 ? true : false}
+                close={closeModalHandler}
+            />
+            <DeleteModal 
+                open={modal > 1 ? true : false}
+                id={modal}
+                close={closeModalHandler}
+            />
+            <Header openModal={openModalHandler}/>
+            <Table openModal={openModalHandler}/>
         </div>
     );
 };

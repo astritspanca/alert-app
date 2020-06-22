@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink, useHistory } from 'react-router-dom';
 
@@ -11,8 +11,10 @@ import './Signup.scss';
 const Signup = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const { register, handleSubmit, triggerValidation, errors } = useForm();
+    const { register, handleSubmit, watch, triggerValidation, errors } = useForm();
 
+    const password = useRef({});
+    password.current = watch("password", "");
     const history = useHistory();
 
     const onSignupHandler = async e => {
@@ -75,7 +77,7 @@ const Signup = () => {
                                     placeholder="Email address"
                                     name="email"
                                     label="EMAIL*"
-                                    register={register({ required: true, pattern: /^\S+@\S+\.\S+$/ })}
+                                    ref={register({ required: true, pattern: /^\S+@\S+\.\S+$/ })}
                                     onBlur={() => triggerValidation('email')}
                                     onChange={() => {
                                         (errors.email?.type === 'required' || errors.email?.type === 'pattern') && triggerValidation('email');
@@ -109,20 +111,21 @@ const Signup = () => {
                                     placeholder="Password"
                                     name="confirm"
                                     label="PASSWORD CONFIRMATION*"
-                                    register={register({ required: true, minLength: 8 })}
-                                    onBlur={() => triggerValidation('confirm')}
-                                    onChange={() => {
-                                        (errors.confirm?.type === 'required' || errors.confirm?.type === 'minLength') && triggerValidation('confirm');
-                                    }}
-                                    error={errors.confirm?.type === 'required' || errors.confirm?.type === 'minLength'}
+                                    ref={register({
+                                        validate: value =>
+                                            value === password.current
+                                        })
+                                    }
+                                    error={errors.confirm?.type === 'validate'}
                                 >
+                                    {errors.confirm?.type === 'validate' && <div className="error-text">Password does not match</div>}
                                 </Input>
                                 <div className="pt-3 pb-3">
                                     <button type="submit" className="btn-b btn--primary">Login</button>
                                 </div>
                                 <hr/>
                                 <div className="pt-3 pb-3">
-                                    <NavLink to="/login" className="btn-b">Aleready have an account? Log in</NavLink>
+                                    <NavLink to="/login" className="btn-b">Already have an account? Log in</NavLink>
                                 </div>
                             </form>
                         </div>
