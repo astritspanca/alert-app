@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { AuthContext } from '../../shared/Context/auth-context';
 
 import axios from '../../axios';
 import Input from '../../shared/FormElements/Input/Input';
@@ -12,6 +13,9 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { register, handleSubmit, triggerValidation, errors } = useForm();
+    
+    const auth = useContext(AuthContext);
+    const history = useHistory();
 
     const onLoginHandler = async e => {
         setError(false);
@@ -24,6 +28,7 @@ const Login = () => {
             })
             setError(false);
             getUserData(response.data);
+            history.push('/dashboard');
         } catch (err) {
             setLoading(false);
             setError(false);
@@ -45,8 +50,8 @@ const Login = () => {
                 token: token,
                 name: response.data.name
             }
-
-            console.log(userData);
+            setLoading(false);
+            auth.login(userData.uid, userData.token, userData.name);
         } catch (err) {
             setLoading(false);
             setError(false);
@@ -107,7 +112,7 @@ const Login = () => {
                                 </div>
                                 <hr/>
                                 <div className="pt-3 pb-3">
-                                    <NavLink to="/login" className="btn-b">Already a new accout!</NavLink>
+                                    <NavLink to="/signup" className="btn-b">Already a new accout!</NavLink>
                                 </div>
                             </form>
                         </div>
