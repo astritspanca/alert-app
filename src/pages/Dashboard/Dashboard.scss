@@ -1,67 +1,97 @@
-.dashboard-header-wrapper{
-    background-color: #590788;
+#dashboard{
+    background-color: #dee2e6;
+    min-height: 100vh;
 
-    .dashboard-header{
-        position: relative;
-        padding-bottom: 50px;
-
-        .app-logo{
-            padding: 16px;
+    .dashboard-header-wrapper{
+        background-color: #590788;
     
-            h3{
-                color: #ffffff;
+        .dashboard-header{
+            position: relative;
+            padding-bottom: 70px;
     
-                span{
-                    font-weight: 300;
-                    color: #f1f1f1;
-                }
-            }
-        }
-    
-        .user-menu{
-            display: flex;
-            justify-content: flex-end;
-            padding: 16px;
-    
-            .user-data{
-                display: flex;
-                align-items: center;
-    
-                .user-name{
+            .app-logo{
+                padding: 16px;
+        
+                h3{
                     color: #ffffff;
-                    font-size: 16px;
-                    margin-right: 7px;
+        
+                    span{
+                        font-weight: 300;
+                        color: #f1f1f1;
+                    }
                 }
-    
-                .avatar{
-                    width: 40px;
-                    height: 40px;
-                    background-color: #ffffff;
-                    border-radius: 50%;
+            }
+        
+            .user-menu{
+                display: flex;
+                justify-content: flex-end;
+                padding: 16px;
+        
+                .user-data{
                     display: flex;
-                    justify-content: center;
                     align-items: center;
-                    font-weight: 600;
-                    margin-left: 7px;
+        
+                    .user-name{
+                        color: #ffffff;
+                        font-size: 16px;
+                        margin-right: 7px;
+                    }
+        
+                    .avatar{
+                        width: 40px;
+                        height: 40px;
+                        background-color: #ffffff;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 600;
+                        margin-left: 7px;
+                    }
+                }
+            }
+        
+            .add--more__button{
+                position: absolute;
+                right: 16px;
+                bottom: -25px;
+                width: 50px;
+                height: 50px;
+                background-color: #1db30f;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                font-size: 22px;
+                font-weight: 700;
+                border: 2px solid #1db30f;
+                z-index: 10;
+                transition: all .15s linear;
+
+                &:hover{
+                    background-color: #17910c;
+                    border-color: #17910c;
                 }
             }
         }
-    
-        .add--more__button{
-            position: absolute;
-            right: 16px;
-            bottom: -25px;
-            width: 50px;
-            height: 50px;
-            background-color: #1db30f;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            font-size: 22px;
-            font-weight: 700;
-            border: 2px solid #1db30f;
+    }
+
+    .dashboard-table{
+        padding-top: 60px;
+        padding-bottom: 60px;
+
+        table{
+            border-radius: 3px;
+            
+            tr{
+                background-color: #ffffff;
+
+                td{
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+            }
         }
     }
 }
